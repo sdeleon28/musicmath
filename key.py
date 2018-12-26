@@ -1,13 +1,5 @@
 from scale import Scale
 
-IONIAN_FORMULA  =    '1	2	3	4	5	6	7	1'.split()
-DORIAN_FORMULA =     '1	2	b3	4	5	6	b7	1'.split()
-PHRYGIAN_FORMULA =   '1	b2	b3	4	5	b6	b7	1'.split()
-LYDIAN_FORMULA =     '1	2	3	#4	5	6	7	1'.split()
-MIXOLYDIAN_FORMULA = '1	2	3	4	5	6	b7	1'.split()
-AEOLIAN_FORMULA =    '1	2	b3	4	5	b6	b7	1'.split()
-LOCRIAN_FORMULA =    '1	b2	b3	4	b5	b6	b7	1'.split()
-
 # There are 12 major keys
 # Three of the major keys have two different spellings
 # So, there are 15 major key spellings
@@ -88,9 +80,9 @@ class Key(object):
         if 'b' in key_name:
             key_name = get_sharp_enharmonic(key_name)
         if key_quality == 'major':
-            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, IONIAN_FORMULA))
+            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'ionian'))
         elif key_quality == 'minor':
-            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, AEOLIAN_FORMULA))
+            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'aeolian'))
         else:
             raise Exception('Should never get here')
         return Key(key_root, key_quality, notes)
