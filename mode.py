@@ -16,8 +16,17 @@ def shift(elements, shift_by):
     return out
 
 class Mode(object):
+    def __init__(self, scale, mode_name, notes):
+        self.scale = scale
+        self.mode_name = mode_name
+        self.notes = notes
+
     @staticmethod
     def make(scale, mode_name):
         mode = MODES[mode_name]
         shift_by = mode - 1
-        return shift(scale, shift_by)
+        notes = shift(scale.notes, shift_by)
+        return Mode(scale, mode_name, notes)
+
+    def __str__(self):
+        return self.mode_name + ' mode of the ' + self.scale.get_scale_name() + ' -> ' + ' '.join(self.notes)

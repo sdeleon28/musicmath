@@ -74,6 +74,9 @@ class Key(object):
         self.key_quality = key_quality
         self.notes = notes
 
+    def get_corrected_scale(self):
+        return Scale(self.key_root, self.key_quality, self.notes)
+
     @staticmethod
     def make(key_root, key_quality):
         key_name = key_root

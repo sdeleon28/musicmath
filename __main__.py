@@ -1,5 +1,8 @@
 from key import Key
+from scale import Scale
+from mode import Mode
 
 if __name__ == '__main__':
-    for key in Key.make_all():
-        print(key)
+    scale = Key.make('C', 'major').get_corrected_scale()
+    mode = Mode.make(scale, 'dorian')
+    print(mode)

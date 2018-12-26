@@ -34,6 +34,9 @@ class Scale(object):
         self.scale_type = scale_type
         self.notes = notes
 
+    def get_scale_name(self):
+        return self.root + ' ' + self.scale_type + ' scale'
+
     @staticmethod
     def make(root, scale_type):
         formula = FORMULAS[scale_type]
