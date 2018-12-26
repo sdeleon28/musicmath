@@ -80,9 +80,9 @@ class Key(object):
         if 'b' in key_name:
             key_name = get_sharp_enharmonic(key_name)
         if key_quality == 'major':
-            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'ionian'))
+            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'ionian').notes)
         elif key_quality == 'minor':
-            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'aeolian'))
+            notes = correct_enharmonics((key_root, key_quality), Scale.make(key_name, 'aeolian').notes)
         else:
             raise Exception('Should never get here')
         return Key(key_root, key_quality, notes)
@@ -99,4 +99,4 @@ class Key(object):
             [Key.make(key, 'minor') for key in MINOR_KEYS_WITH_FLATS]
 
     def __str__(self):
-        return self.key_root + ' ' + self.key_quality + ' -> ' + ' '.join(self.notes)
+        return self.key_root + ' ' + self.key_quality + ' key -> ' + ' '.join(self.notes)
