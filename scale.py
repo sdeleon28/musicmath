@@ -29,10 +29,11 @@ INTERVALS_TO_SEMITONES = {
 Makes scales with no key context
 """
 class Scale(object):
-    def __init__(self, root, scale_type, notes):
+    def __init__(self, root, scale_type, notes, formula):
         self.root = root
         self.scale_type = scale_type
         self.notes = notes
+        self.formula = formula
 
     def get_scale_name(self):
         return self.root + ' ' + self.scale_type + ' scale'
@@ -47,7 +48,7 @@ class Scale(object):
         for interval in formula:
             semitones = INTERVALS_TO_SEMITONES[interval]
             notes.append(note_names[semitones])
-        return Scale(root, scale_type, notes)
+        return Scale(root, scale_type, notes, formula)
 
     def __str__(self):
         return root + ' ' + scale_type + ' scale -> ' + ' '.join(self.notes)

@@ -1,4 +1,4 @@
-from scale import Scale
+from scale import Scale, FORMULAS
 
 # There are 12 major keys
 # Three of the major keys have two different spellings
@@ -23,6 +23,7 @@ def get_sharp_enharmonic(note):
         'Bb': 'A#',
         'Cb': 'B',
         'F': 'E#',
+        'Fb': 'E',
         'C': 'B#',
     }[note]
 
@@ -75,7 +76,12 @@ class Key(object):
         self.notes = notes
 
     def get_corrected_scale(self):
-        return Scale(self.key_root, self.key_quality, self.notes)
+        if self.key_quality == 'major':
+            return Scale(self.key_root, self.key_quality, self.notes, FORMULAS['ionian'])
+        elif self.key_quality == 'minor':
+            return Scale(self.key_root, self.key_quality, self.notes, FORMULAS['aeolian'])
+        else:
+            raise Exception("Shouldn't get here")
 
     @staticmethod
     def make(key_root, key_quality):
@@ -100,6 +106,14 @@ class Key(object):
             [Key.make(key, 'major') for key in MAJOR_KEYS_WITH_FLATS] + \
             [Key.make(key, 'minor') for key in MINOR_KEYS_WITH_SHARPS] + \
             [Key.make(key, 'minor') for key in MINOR_KEYS_WITH_FLATS]
+
+    @staticmethod
+    def make_all_majors():
+        return [
+            Key.make('C', 'major'),
+        ] + \
+            [Key.make(key, 'major') for key in MAJOR_KEYS_WITH_SHARPS] + \
+            [Key.make(key, 'major') for key in MAJOR_KEYS_WITH_FLATS]
 
     def __str__(self):
         return self.key_root + ' ' + self.key_quality + ' key -> ' + ' '.join(self.notes)

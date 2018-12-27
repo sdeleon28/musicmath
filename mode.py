@@ -1,4 +1,4 @@
-from key import Key
+from key import Key, get_sharp_enharmonic
 
 MODES = {
     'ionian': 1,
@@ -24,8 +24,21 @@ class Mode(object):
         self.notes = notes
 
     @property
+    def formula(self):
+        return self.scale.formula
+
+    @property
     def root(self):
         return self.notes[0]
+
+    @property
+    def normalized_notes(self):
+        return [
+            get_sharp_enharmonic(note)
+            if 'b' in note
+            else note
+            for note in self.notes
+        ]
 
     @staticmethod
     def make(scale, mode_name):
@@ -36,7 +49,7 @@ class Mode(object):
 
     @staticmethod
     def make_all_dorian():
-        keys = Key.make_all()
+        keys = Key.make_all_majors()
         dorian_modes = []
         for key in keys:
             scale = key.get_corrected_scale()

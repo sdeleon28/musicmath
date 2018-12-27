@@ -1,8 +1,4 @@
-from key import Key
-from scale import Scale
-from mode import Mode
+from reaper.notemap import NoteMap
 
 if __name__ == '__main__':
-    dorian_modes = Mode.make_all_dorian()
-    for mode in dorian_modes:
-        print(mode)
+    NoteMap.write_all_dorian_note_maps()
