@@ -1,3 +1,5 @@
+from key import Key
+
 MODES = {
     'ionian': 1,
     'dorian': 2,
@@ -21,6 +23,10 @@ class Mode(object):
         self.mode_name = mode_name
         self.notes = notes
 
+    @property
+    def root(self):
+        return self.notes[0]
+
     @staticmethod
     def make(scale, mode_name):
         mode = MODES[mode_name]
@@ -28,5 +34,20 @@ class Mode(object):
         notes = shift(scale.notes, shift_by)
         return Mode(scale, mode_name, notes)
 
+    @staticmethod
+    def make_all_dorian():
+        keys = Key.make_all()
+        dorian_modes = []
+        for key in keys:
+            scale = key.get_corrected_scale()
+            mode = Mode.make(scale, 'dorian')
+            dorian_modes.append(mode)
+        return dorian_modes
+
     def __str__(self):
-        return self.mode_name + ' mode of the ' + self.scale.get_scale_name() + ' -> ' + ' '.join(self.notes)
+        return '{root} {mode_name} mode ({scale_name}) -> {scale_notes}'.format(
+            root=self.root,
+            mode_name=self.mode_name,
+            scale_name=self.scale.get_scale_name(),
+            scale_notes=' '.join(self.notes),
+        )
