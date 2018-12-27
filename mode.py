@@ -48,14 +48,15 @@ class Mode(object):
         return Mode(scale, mode_name, notes)
 
     @staticmethod
-    def make_all_dorian():
+    def make_all():
         keys = Key.make_all_majors()
-        dorian_modes = []
+        modes = []
         for key in keys:
-            scale = key.get_corrected_scale()
-            mode = Mode.make(scale, 'dorian')
-            dorian_modes.append(mode)
-        return dorian_modes
+            for mode in MODES.keys():
+                scale = key.get_corrected_scale()
+                mode = Mode.make(scale, mode)
+                modes.append(mode)
+        return modes
 
     def __str__(self):
         return '{root} {mode_name} mode ({scale_name}) -> {scale_notes}'.format(

@@ -26,13 +26,13 @@ class NoteMap(object):
         return NoteMap(mode, notes)
 
     @staticmethod
-    def make_all_dorian_note_maps():
-        dorian_modes = Mode.make_all_dorian()
-        return [NoteMap.make(mode) for mode in dorian_modes]
+    def make_all_note_maps():
+        modes = Mode.make_all()
+        return [NoteMap.make(mode) for mode in modes]
 
     @staticmethod
-    def write_all_dorian_note_maps():
-        for note_map in NoteMap.make_all_dorian_note_maps():
+    def write_all_note_maps():
+        for note_map in NoteMap.make_all_note_maps():
             note_map.write()
 
     def write(self):
