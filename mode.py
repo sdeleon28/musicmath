@@ -1,4 +1,5 @@
 from key import Key, get_sharp_enharmonic
+from scale import FORMULAS
 
 MODES = {
     'ionian': 1,
@@ -25,7 +26,7 @@ class Mode(object):
 
     @property
     def formula(self):
-        return self.scale.formula
+        return FORMULAS[self.mode_name]
 
     @property
     def root(self):
